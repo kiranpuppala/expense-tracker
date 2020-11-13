@@ -22,7 +22,6 @@ class NeumorphicDropdown extends StatefulWidget {
 
 class _NeumorphicDropdownState extends State<NeumorphicDropdown> {
   // Define the various properties with default values. Update these properties
-  // when the user taps a FloatingActionButton.
   bool _enabled = false;
 
   String selectedItem;
@@ -75,7 +74,7 @@ class _NeumorphicDropdownState extends State<NeumorphicDropdown> {
               Visibility(
                   visible: _enabled,
                   child: ConstrainedBox(
-                      constraints: BoxConstraints(maxHeight: 90),
+                      constraints: BoxConstraints(maxHeight: 180),
                       child: ListView.builder(
                           shrinkWrap: true,
                           itemCount: widget.entries.length,

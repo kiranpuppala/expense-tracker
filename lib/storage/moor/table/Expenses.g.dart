@@ -12,7 +12,7 @@ class Expense extends DataClass implements Insertable<Expense> {
   final String name;
   final String amount;
   final String category;
-  final String date;
+  final int date;
   Expense(
       {@required this.id,
       @required this.name,
@@ -31,7 +31,7 @@ class Expense extends DataClass implements Insertable<Expense> {
           stringType.mapFromDatabaseResponse(data['${effectivePrefix}amount']),
       category: stringType
           .mapFromDatabaseResponse(data['${effectivePrefix}category']),
-      date: stringType.mapFromDatabaseResponse(data['${effectivePrefix}date']),
+      date: intType.mapFromDatabaseResponse(data['${effectivePrefix}date']),
     );
   }
   factory Expense.fromJson(Map<String, dynamic> json,
@@ -41,7 +41,7 @@ class Expense extends DataClass implements Insertable<Expense> {
       name: serializer.fromJson<String>(json['name']),
       amount: serializer.fromJson<String>(json['amount']),
       category: serializer.fromJson<String>(json['category']),
-      date: serializer.fromJson<String>(json['date']),
+      date: serializer.fromJson<int>(json['date']),
     );
   }
   @override
@@ -52,7 +52,7 @@ class Expense extends DataClass implements Insertable<Expense> {
       'name': serializer.toJson<String>(name),
       'amount': serializer.toJson<String>(amount),
       'category': serializer.toJson<String>(category),
-      'date': serializer.toJson<String>(date),
+      'date': serializer.toJson<int>(date),
     };
   }
 
@@ -71,7 +71,7 @@ class Expense extends DataClass implements Insertable<Expense> {
   }
 
   Expense copyWith(
-          {int id, String name, String amount, String category, String date}) =>
+          {int id, String name, String amount, String category, int date}) =>
       Expense(
         id: id ?? this.id,
         name: name ?? this.name,
@@ -112,7 +112,7 @@ class ExpensesCompanion extends UpdateCompanion<Expense> {
   final Value<String> name;
   final Value<String> amount;
   final Value<String> category;
-  final Value<String> date;
+  final Value<int> date;
   const ExpensesCompanion({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
@@ -125,7 +125,7 @@ class ExpensesCompanion extends UpdateCompanion<Expense> {
       Value<String> name,
       Value<String> amount,
       Value<String> category,
-      Value<String> date}) {
+      Value<int> date}) {
     return ExpensesCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
@@ -177,12 +177,15 @@ class $ExpensesTable extends Expenses with TableInfo<$ExpensesTable, Expense> {
   }
 
   final VerificationMeta _dateMeta = const VerificationMeta('date');
-  GeneratedTextColumn _date;
+  GeneratedIntColumn _date;
   @override
-  GeneratedTextColumn get date => _date ??= _constructDate();
-  GeneratedTextColumn _constructDate() {
-    return GeneratedTextColumn('date', $tableName, false,
-        minTextLength: 1, maxTextLength: 64);
+  GeneratedIntColumn get date => _date ??= _constructDate();
+  GeneratedIntColumn _constructDate() {
+    return GeneratedIntColumn(
+      'date',
+      $tableName,
+      false,
+    );
   }
 
   @override
@@ -253,7 +256,7 @@ class $ExpensesTable extends Expenses with TableInfo<$ExpensesTable, Expense> {
       map['category'] = Variable<String, StringType>(d.category.value);
     }
     if (d.date.present) {
-      map['date'] = Variable<String, StringType>(d.date.value);
+      map['date'] = Variable<int, IntType>(d.date.value);
     }
     return map;
   }

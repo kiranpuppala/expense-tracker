@@ -41,3 +41,27 @@ TextStyle textStyle(BuildContext context) {
       fontFamily: "Lato",
       fontWeight: FontWeight.w700);
 }
+
+TextStyle primaryActive(BuildContext context) {
+  return TextStyle(
+      fontSize: 14,
+      color: NeumorphicTheme.defaultTextColor(context),
+      fontFamily: "Lato",
+      fontWeight: FontWeight.w700);
+}
+
+TextStyle secondaryActive(BuildContext context) {
+  return TextStyle(
+      fontSize: 12,
+      color: NeumorphicTheme.defaultTextColor(context),
+      fontFamily: "Lato",
+      fontWeight: FontWeight.w700);
+}
+
+TextStyle secondaryInactive(BuildContext context) {
+  return TextStyle(
+      fontSize: 12,
+      color:  NeumorphicTheme.defaultTextColor(context).withOpacity(0.75),
+      fontFamily: "Lato",
+      fontWeight: FontWeight.w700);
+}

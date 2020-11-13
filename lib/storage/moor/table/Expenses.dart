@@ -13,7 +13,7 @@ class Expenses extends Table {
 
   TextColumn get category => text().withLength(min: 1, max: 32)();
 
-  TextColumn get date => text().withLength(min: 1, max: 64)();
+  IntColumn get date => integer()();
 
   @override
   Set<Column> get primaryKey => {id};
